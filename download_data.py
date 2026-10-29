@@ -24,13 +24,10 @@ def download_and_extract_dataset():
     print("=" * 60)
     print("Iniciando descarga del dataset desde Google Drive...")
     print("=" * 60)
-
-    # 3. Descarga mediante gdown
-    download_url = f"https://drive.google.com/uc?id={DRIVE_FILE_ID}"
     
     try:
-        # fuzzy=True permite a gdown resolver URLs completas o IDs directos
-        output = gdown.download(download_url, ZIP_DESTINATION, quiet=False, fuzzy=True)
+        # 3. Descarga mediante gdown (usando directamente el ID para máxima compatibilidad)
+        output = gdown.download(id=DRIVE_FILE_ID, output=ZIP_DESTINATION, quiet=False)
         
         if not output or not os.path.exists(ZIP_DESTINATION):
             print("\n[ERROR] Falló la descarga. Verifica que el archivo de Drive tenga permisos de lectura públicos:")
