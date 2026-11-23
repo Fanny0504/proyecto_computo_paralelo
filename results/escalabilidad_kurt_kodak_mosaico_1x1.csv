@@ -1,0 +1,6 @@
+maquina,imagen,ancho,alto,k,procesos,arranque_s,tiempo_s,speedup,eficiencia,dif_max_vs_p1
+kurt,kodak_mosaico_1x1,768,512,20,1,0.0,0.6412,1.0,1.0,0.00e+00
+kurt,kodak_mosaico_1x1,768,512,20,2,1.881,0.7082,0.905,0.453,0.00e+00
+kurt,kodak_mosaico_1x1,768,512,20,4,1.956,0.729,0.88,0.22,0.00e+00
+kurt,kodak_mosaico_1x1,768,512,20,8,2.069,0.8051,0.796,0.1,0.00e+00
+kurt,kodak_mosaico_1x1,768,512,20,16,2.718,1.029,0.623,0.039,0.00e+00
