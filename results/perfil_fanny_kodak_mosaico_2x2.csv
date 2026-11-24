@@ -1,0 +1,8 @@
+maquina,imagen,ancho,alto,k,modo,procesos,tiempo_s,speedup,eficiencia,t_covarianza,t_eigh,t_proyeccion,dif_max_vs_secuencial
+fanny,kodak_mosaico_2x2,1536,1024,20,filas,1,5.638,1.0,1.0,0.6453,4.7266,0.1442,0.00e+00
+fanny,kodak_mosaico_2x2,1536,1024,20,filas,2,6.3,0.895,0.447,1.0512,4.8238,0.3058,0.00e+00
+fanny,kodak_mosaico_2x2,1536,1024,20,filas,3,6.0043,0.939,0.313,1.0093,4.617,0.2549,1.28e-13
+fanny,kodak_mosaico_2x2,1536,1024,20,filas,4,6.1644,0.915,0.229,1.1902,4.581,0.237,0.00e+00
+fanny,kodak_mosaico_2x2,1536,1024,20,canales,2,4.7448,1.188,0.594,0.7542,6.0561,0.1555,0.00e+00
+fanny,kodak_mosaico_2x2,1536,1024,20,canales,3,3.0584,1.843,0.614,0.84,7.2516,0.1987,0.00e+00
+fanny,kodak_mosaico_2x2,1536,1024,20,canales,4,3.0082,1.874,0.469,0.8019,7.0937,0.1727,0.00e+00
