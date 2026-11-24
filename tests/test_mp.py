@@ -1,4 +1,4 @@
-"""Prueba del modulo multiprocessing: compara 1, 2 y 4 procesos contra una referencia directa."""
+"""Prueba de pca_mp: compara varios procesos y los dos modos contra una referencia directa."""
 import os
 import sys
 import time
@@ -36,26 +36,25 @@ def main():
     k = 8
     ref = referencia(X, k)
 
-    resultados = {}
-    for procesos in (1, 2, 4):
+    configuraciones = [("filas", 1), ("filas", 2), ("filas", 4), ("canales", 2), ("canales", 3)]
+    peor = 0.0
+    for modo, procesos in configuraciones:
         t = time.perf_counter()
-        with p.PCAParalelo(procesos) as pca:
+        with p.PCAParalelo(procesos, modo) as pca:
             t_arranque = time.perf_counter() - t
             t = time.perf_counter()
             rec, stored, evr = pca.comprimir(X, k)
             t_calculo = time.perf_counter() - t
-        resultados[procesos] = rec
-        print(f"procesos={procesos}: arranque={t_arranque:.2f} s | calculo={t_calculo:.3f} s | "
-              f"max|rec - ref| = {np.abs(rec - ref).max():.2e}")
+            etapas = pca.etapas
+        dif = float(np.abs(rec - ref).max())
+        peor = max(peor, dif)
+        print(f"modo={modo:8s} procesos={procesos}: arranque={t_arranque:.2f} s | calculo={t_calculo:.3f} s | "
+              f"max|rec - ref| = {dif:.2e} | etapas: " + ", ".join(f"{n}={v:.3f}" for n, v in etapas.items()))
 
-    d12 = np.abs(resultados[1] - resultados[2]).max()
-    d14 = np.abs(resultados[1] - resultados[4]).max()
-    calidad = p.psnr(X, resultados[1])
-    print(f"max|1 - 2 procesos| = {d12:.2e} | max|1 - 4 procesos| = {d14:.2e}")
+    calidad = p.psnr(X, rec)
     print(f"PSNR = {calidad:.1f} dB | ratio = {X.size / stored:.2f}:1 | varianza explicada = {evr:.4f}")
 
-    assert np.abs(resultados[1] - ref).max() < 1e-6, "la version de 1 proceso no coincide con la referencia"
-    assert d12 < 1e-6 and d14 < 1e-6, "las versiones paralelas no coinciden con la secuencial"
+    assert peor < 1e-6, "alguna configuracion no coincide con la referencia"
     assert calidad > 30, "la calidad es demasiado baja"
     print("OK: todas las comprobaciones pasaron")
 
